@@ -9,7 +9,8 @@ public class SceneTransition : MonoBehaviour
     {
         if (collision.CompareTag("Player")) // Check if it's the player that collided
         {
-            SceneManager.LoadScene(sceneName); // Load the specified scene
+            SceneManager.LoadScene(sceneName); // Load the specified scene  
+
         }
     }
 }
