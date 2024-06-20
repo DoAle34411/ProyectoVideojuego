@@ -6,7 +6,7 @@ public class Shooter : MonoBehaviour
 {
     public GameObject projectilePrefab; // Drag your projectile prefab here
     public Vector3 spawnPosition; // The position where the projectile will spawn
-    public float spawnInterval = 10f; // Time interval between each spawn
+    public float spawnInterval = 3f; // Time interval between each spawn
 
     private float timeSinceLastSpawn;
 

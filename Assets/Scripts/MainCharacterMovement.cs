@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,12 @@ public class MainCharacterMovement : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
 
+    private Animator anim;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim= GetComponent<Animator>();
         transform.position = respawnPoint.position;
         if (respawnSound != null) // Check if the respawn sound exists
         {
@@ -29,10 +33,18 @@ public class MainCharacterMovement : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         float moveInput = Input.GetAxis("Horizontal");
+        if (moveInput != 0)
+        {
+            anim.Play("Run");
+        }
+        else {
+            anim.Play("Idle");
+        }
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && Mathf.Abs(rb.velocity.y) <= 0.01f)
+        if ((Input.GetKeyDown(KeyCode.Space)||Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded && Mathf.Abs(rb.velocity.y) <= 0.01f)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            anim.Play("Jump");
         }
     }
 
